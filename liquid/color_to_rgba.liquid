@@ -1,0 +1,15 @@
+{% comment %}
+  This snippet converts a HEX color with opacity to RGBA value.
+  Accepts:
+  - color: {String} HEX color value.
+  - opacity: {Number} opacity value.
+    * If % used -> percent_value | times: 0.01
+  Usage:
+  {% render 'color_to_rgba', color: hex_color, opacity: opacity %}
+{% endcomment %}
+
+{% liquid
+  assign rgb = color | color_to_rgb
+  assign tail = opacity | prepend: ', ' | append: ')'  
+%}
+{{ rgb | replace: 'rgb', 'rgba' | replace: ')', tail }}
